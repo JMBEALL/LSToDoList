@@ -30,17 +30,19 @@ function makeCounterLogger(num) {
 // practice problem 2
 
 function makeList() {
-  list = [];
+  let list = [];
   return function(arg) {
     if (!list.includes(arg)) {
       if(!(arg === undefined)) {
         list.push(arg);
+        console.log(`${arg} added!`)
       }
-      console.log(list);
+      // console.log(list);
     } else if (list.includes(arg)) {
       let index = list.indexOf(arg);
       list.splice(index, 1);
-      console.log(list)
+      console.log(`${arg} removed!`)
+      // console.log(list)
     } else if (arg === undefined) {
       if(list.length > 0) {
         list.forEach(el => console.log(el));
@@ -53,22 +55,62 @@ function makeList() {
 }
 
 
-let list2 = makeList();
-list2();
-// The list is empty.
+// let list2 = makeList();
+// list2();
+// // The list is empty.
 
-list2("make breakfast");
-// make breakfast added!
+// list2("make breakfast");
+// // make breakfast added!
 
-list2("read book");
-// read book added!
+// list2("read book");
+// // read book added!
 
-list2();
-// make breakfast
-// read book
+// list2();
+// // make breakfast
+// // read book
 
-list2("make breakfast");
-// make breakfast removed!
+// list2("make breakfast");
+// // make breakfast removed!
 
-list2();
-// read book
+// list2();
+// // read book
+
+// updating the application programming interface
+
+function makeList() {
+  return {
+    listLong : [],
+    add(arg) {
+      this.listLong.push(arg)
+      console.log(`${arg} added!`)
+    },
+    list() {
+      this.listLong.forEach(el => console.log(el));
+    },
+    remove(arg) {
+      let index = this.listLong.indexOf(arg);
+      this.listLong.splice(index, 1);
+      console.log(`${arg} removed!`)
+    }
+  }
+}
+
+let list = makeList();
+list.add("peas");
+// peas added!
+
+list.list();
+// peas
+
+list.add("corn");
+// corn added!
+
+list.list();
+// peas
+// corn
+
+list.remove("peas");
+// peas removed!
+
+list.list();
+// corn
